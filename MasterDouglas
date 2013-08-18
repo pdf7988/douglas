@@ -1,0 +1,35 @@
+%Load in the data
+model=1
+scenario=1
+[GDD]=LoadGDD(model,scenario);
+[MAP]=LoadMAP(model,scenario);
+load soil250;
+f=find(lat(:,1)>=42 & lat(:,1)<=49);
+f2=find(lon(2,:)>=-122 & lon(2,:)<=-111);
+soil=soil(f,f2);
+lat=lat(f,f2);
+lon=lon(f,f2);
+%Soil depth tentative factor multiplied by 10 for m
+soil=soil*5*10;
+MAP=flipdim(MAP,2);
+GDD=flipdim(GDD,2);
+MAP=MAP*25.4;
+
+%======================
+%Sensitivity test
+%=====================
+
+MAP=MAP*1.1
+
+%======================
+% Test end
+%======================
+
+%Here is how douglas zones are calc for single years
+
+dz1=douglaszone(squeeze(MAP(1,:,:)),squeeze(GDD(1,:,:)),soil);
+
+%Here is how douglas zones are calc for average
+
+ dzmean=douglaszone(squeeze(mean(MAP,1)),squeeze(mean(GDD,1)),soil);
+
