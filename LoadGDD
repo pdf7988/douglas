@@ -1,0 +1,34 @@
+
+function [GDD]=LoadGDD(model,scenario)
+
+
+myFile='/cyclone/CMIP5/DAILY/DOWNSCALED_DATA/maca_2var_100pat_WUSA_CSIRO-Mk3-6-0_historical_$
+myFile2='/cyclone/CMIP5/DAILY/DOWNSCALED_DATA/maca_2var_100pat_WUSA_CSIRO-Mk3-6-0_historical$
+
+matobj =matfile(myFile);
+matobj2 =matfile(myFile2);
+%matobj.data;
+lat_target = [42 49];
+lon_target = [249 238];
+
+
+lat = matobj.lat;
+lon = matobj.lon;
+
+f_lat =find(lat>=min(lat_target)&lat<=max(lat_target));
+f_lon =find(lon>=min(lon_target)&lon<=max(lon_target));
+
+%get data in inches
+% in dimensions  days,years,lat,lon
+tmin = matobj.data(1:150,:,f_lat,f_lon);
+tmax = matobj2.data(1:150,:,f_lat,f_lon);
+tmean= tmin/2 + tmax/2-273.15;
+clear tmax tmin
+belowzero=find(tmean<0);
+tmean(belowzero)=0;
+GDD=sum(tmean,1);
+GDD=squeeze(GDD);
+clear tmean
+
+
+
