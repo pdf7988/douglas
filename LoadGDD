@@ -1,9 +1,8 @@
-
 function [GDD]=LoadGDD(model,scenario)
 
 
-myFile='/cyclone/CMIP5/DAILY/DOWNSCALED_DATA/maca_2var_100pat_WUSA_CSIRO-Mk3-6-0_historical_$
-myFile2='/cyclone/CMIP5/DAILY/DOWNSCALED_DATA/maca_2var_100pat_WUSA_CSIRO-Mk3-6-0_historical$
+myFile='/cyclone/CMIP5/DAILY/DOWNSCALED_DATA/maca_2var_100pat_WUSA_CSIRO-Mk3-6-0_historical_tasmin.mat'
+myFile2='/cyclone/CMIP5/DAILY/DOWNSCALED_DATA/maca_2var_100pat_WUSA_CSIRO-Mk3-6-0_historical_tasmin.mat'
 
 matobj =matfile(myFile);
 matobj2 =matfile(myFile2);
